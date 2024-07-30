@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MainFactory from "./components/MainF/MainFactory";
 import StoreMaintains from "./components/Substores/StoreMaintains";
+import Empty from "./components/MainF/Empty";
+import Sticker from "./components/MainF/Sticker";
+import Glue from "./components/MainF/Glue";
 
 
 function App() {
@@ -24,11 +27,25 @@ function App() {
 
                 {/* Menu bar content */}
                 <div className="flex flex-col w-1/6 border-e-2 border-gray-300  pt-5 ">
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-200  " onClick={()=>setSelect(1)} >Home</div>
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-200  " onClick={()=>setSelect(2)} >Main Factory </div>
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-200  " onClick={()=>setSelect(3)} >Sub Stores</div>
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-200  " onClick={()=>setSelect(4)} >Sales Report</div>
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-200  " onClick={()=>setSelect(5)} >Users Management</div>
+                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(1)} >Home</div>
+					<div className=" font-bold px-3 py-6 text-lg cursor-pointer " >
+						<div>Main Factory</div>
+						<ul className="">
+							<li className="py-4 pl-6  hover:bg-slate-300" onClick={() => setSelect(2.1)}>Empty</li>
+							<li className="py-4 pl-6  hover:bg-slate-300" onClick={() => setSelect(2.2)}>Sticker</li>
+							<li className="py-4 pl-6  hover:bg-slate-300"  onClick={() => setSelect(2.3)}>Glue</li>
+						</ul>
+					</div>
+					<div className=" font-bold px-3 py-6 text-lg cursor-pointer   " onClick={() => setSelect(3)} >
+						<div>Main Store</div>
+						{/* <ul className="">
+							<li className="py-4 pl-6  hover:bg-slate-300">Empty</li>
+							<li className="py-4 pl-6  hover:bg-slate-300">Sticker</li>
+							<li className="py-4 pl-6  hover:bg-slate-300">Glue</li>
+						</ul> */}
+					</div>
+                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(4)} >Sales Report</div>
+                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(5)} >Users Management</div>
                 </div>
 
                 {/* display Content */}
@@ -40,9 +57,19 @@ function App() {
                             <h1 className="text-3xl z-10">Bottled Drinking Water</h1>
                         </div>)
                 }
-                {
+                {/* {
                     selected === 2 && (<MainFactory />)
+                } */}
+                {
+                    selected === 2.1 && (<Empty/>)
                 }
+                {
+                    selected === 2.2 && (<Sticker/>)
+				}
+                {
+                    selected === 2.3 && (<Glue/>)
+				}
+				
                 {
                     selected === 3 && (<StoreMaintains/>)
                 }

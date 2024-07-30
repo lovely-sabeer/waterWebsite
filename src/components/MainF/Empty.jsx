@@ -12,7 +12,7 @@ function Empty({ func }) {
 				<img src="/logo-waves.png" alt="logo" className=" h-5/6 rounded-full absolute opacity-20" />
 				
                 <div className="w-4/6 m-4 flex flex-col justify-start items-center gap-2 z-10 ">
-					{/* <h1 className="text-6xl font-bold p-5 ">EMPTY BOTTLES</h1>  */}
+					<div className="text-4xl font-bold ">EMPTY BOTTLES</div> 
 					<button className='btn self-end' onClick={()=>setAddnew(1)}>Add New Stock</button>
                     {/* <button >Add new</button> */}
                     <div className="grid grid-cols-3 items-center text-center p-5 w-full border-2 border-black rounded-md cursor-pointer  font-bold">
