@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import MainFactory from "./components/MainF/MainFactory";
-import StoreMaintains from "./components/Substores/StoreMaintains";
 import Empty from "./components/MainF/Empty";
-import Sticker from "./components/MainF/Sticker";
-import Glue from "./components/MainF/Glue";
-
+import Dispatch from "./components/MainF/Dispatch";
+import Report from "./components/MainF/Report";
+import Distributers from "./components/Substores/Distributers";
+import Customer from "./components/Substores/Customer";
+// import GetTotal from "./getTotal";
+import Stock from "./components/Substores/Stock";
 
 function App() {
     const [selected, setSelect] = useState(1)
-
-
-
-
+    
     return (
-        <div className="h-screen relative overflow-hidden">
+			<div className="h-screen relative overflow-hidden">
+						{/* <GetTotal/> */}
             {/* navigation bar  */}
             <div className="w-full bg-slate-800 flex justify-between px-5 items-center sticky top-0 left-0 " style={{ height: "10vh"}}>
                 <img src="/logo-waves.png" alt="logo" className=" h-5/6 rounded-full" />
@@ -27,91 +26,52 @@ function App() {
 
                 {/* Menu bar content */}
                 <div className="flex flex-col w-1/6 border-e-2 border-gray-300  pt-5 ">
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(1)} >Home</div>
-					<div className=" font-bold px-3 py-6 text-lg cursor-pointer " >
+                    <div className=" font-bold px-3 py-4 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(1)} >Home</div>
+					<div className=" font-bold px-3 text-lg cursor-pointer " >
 						<div>Main Factory</div>
-						<ul className="">
-							<li className="py-4 pl-6  hover:bg-slate-300" onClick={() => setSelect(2.1)}>Empty</li>
-							<li className="py-4 pl-6  hover:bg-slate-300" onClick={() => setSelect(2.2)}>Sticker</li>
-							<li className="py-4 pl-6  hover:bg-slate-300"  onClick={() => setSelect(2.3)}>Glue</li>
+						<ul className=" ">
+							<li className="py-4 pl-3  hover:bg-slate-300" onClick={() => setSelect(2.1)}>Material Purchase</li>
+							<li className="py-4 pl-3  hover:bg-slate-300" onClick={() => setSelect(2.2)}>Dispatch</li>
+							<li className="py-4 pl-3  hover:bg-slate-300"  onClick={() => setSelect(2.3)}>Factory Report</li>
 						</ul>
 					</div>
-					<div className=" font-bold px-3 py-6 text-lg cursor-pointer   " onClick={() => setSelect(3)} >
+					<div className=" font-bold px-3 text-lg cursor-pointer" >
 						<div>Main Store</div>
-						{/* <ul className="">
-							<li className="py-4 pl-6  hover:bg-slate-300">Empty</li>
-							<li className="py-4 pl-6  hover:bg-slate-300">Sticker</li>
-							<li className="py-4 pl-6  hover:bg-slate-300">Glue</li>
-						</ul> */}
+						<ul className="w-full">
+							<li className="py-4 pl-6  hover:bg-slate-300" onClick={() => setSelect(3.1)}>Whole Sellers</li>
+							<li className="py-4 pl-6  hover:bg-slate-300" onClick={() => setSelect(3.2)}>Customers</li>
+							<li className="py-4 pl-6  hover:bg-slate-300"  onClick={() => setSelect(3.3)}>Stock Details</li>
+						</ul>
 					</div>
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(4)} >Sales Report</div>
-                    <div className=" font-bold px-3 py-6 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(5)} >Users Management</div>
-                </div>
-
-                {/* display Content */}
+					{/* <div className=" font-bold px-3 py-4 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(4)} >Sales Report</div> */}
+					<div className=" font-bold px-3 py-4 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(5)} >Users Management</div>
+				</div>
                 {
                     selected === 1 && (
                         <div className=" w-full flex flex-col justify-center items-center ">
                             <img src="/logo-waves.png" alt="logo" className=" h-5/6 rounded-full absolute opacity-20" />
                             <h1 className="text-8xl font-bold z-10 text-center">WAVES WATER  </h1>
                             <h1 className="text-3xl z-10">Bottled Drinking Water</h1>
-                        </div>)
+        				</div>
+                    )
                 }
-                {/* {
-                    selected === 2 && (<MainFactory />)
-                } */}
                 {
                     selected === 2.1 && (<Empty/>)
                 }
                 {
-                    selected === 2.2 && (<Sticker/>)
-				}
-                {
-                    selected === 2.3 && (<Glue/>)
-				}
-				
-                {
-                    selected === 3 && (<StoreMaintains/>)
+                    selected === 2.2 && (<Dispatch/>)
                 }
                 {
-                    selected === 4 && (
-                        <div className=" w-full flex flex-col justify-start items-center ">
-                            <img src="/logo-waves.png" alt="logo" className=" h-5/6 rounded-full absolute opacity-20" />
-                            <div className="w-full flex flex-col justify-center items-center gap-5 z-10">
-                                <h1 className="text-6xl font-bold p-5 ">SALES REPORT</h1> 
-                                <button >Add new</button>
-                                <div className="grid grid-cols-4 text-center p-5 w-4/5 border-2 border-black rounded-md cursor-pointer  font-bold">
-                                    <div>Category: 500 ml</div>
-                                    <div>Recieved Bottles: 400</div>
-                                    <div>Used Bottles: 400</div>
-                                    <div>Balance Bottels: 600</div>
-                                </div>
-                                <div className="grid grid-cols-4 text-center p-5 w-4/5 border-2 border-black rounded-md cursor-pointer  font-bold">
-                                    <div>Category: 1 L</div>
-                                    <div>Recieved Bottles: 400</div>
-                                    <div>Used Bottles: 400</div>
-                                    <div>Balance Bottels: 600</div>
-                                </div>
-                                <div className="grid grid-cols-4 text-center p-5 w-4/5 border-2 border-black rounded-md cursor-pointer  font-bold">
-                                    <div>Category: 1.5 L</div>
-                                    <div>Recieved Bottles: 400</div>
-                                    <div>Used Bottles: 400</div>
-                                    <div>Balance Bottels: 600</div>
-                                </div>
-                                <div className="grid grid-cols-4 text-center p-5 w-4/5 border-2 border-black rounded-md cursor-pointer  font-bold">
-                                    <div>Category: 5 L</div>
-                                    <div>Recieved Bottles: 400</div>
-                                    <div>Used Bottles: 400</div>
-                                    <div>Balance Bottels: 600</div>
-                                </div>
-                                <div className="grid grid-cols-4 text-center p-5 w-4/5 border-2 border-black rounded-md cursor-pointer  font-bold">
-                                    <div>Category: 19 L</div>
-                                    <div>Recieved Bottles: 400</div>
-                                    <div>Used Bottles: 400</div>
-                                    <div>Balance Bottels: 600</div>
-                                </div>
-                            </div>
-                        </div>)
+                    selected === 2.3 && (<Report/>)
+                }
+                {
+                    selected === 3.1 && (<Distributers/>)
+                }
+                {
+                    selected === 3.2 && (<Customer/>)
+                }
+                {
+                    selected === 3.3 && (<Stock/>)
                 }
                 {
                     selected === 5 && (
@@ -129,14 +89,13 @@ function App() {
                                     <div>Recieved Bottles: 400</div>
                                 </div>
                             </div>
-                        </div>)
+    					</div>
+    				)
                 }
-            </div>
-
-
-
+      	    </div>
         </div>
     );
 }
+
 
 export default App;
