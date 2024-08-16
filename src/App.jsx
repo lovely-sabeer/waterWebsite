@@ -4,7 +4,6 @@ import Dispatch from "./components/MainF/Dispatch";
 import Report from "./components/MainF/Report";
 import Distributers from "./components/Substores/Distributers";
 import Customer from "./components/Substores/Customer";
-// import GetTotal from "./getTotal";
 import Stock from "./components/Substores/Stock";
 
 function App() {
@@ -12,8 +11,6 @@ function App() {
     
     return (
 			<div className="h-screen relative overflow-hidden">
-						{/* <GetTotal/> */}
-            {/* navigation bar  */}
             <div className="w-full bg-slate-800 flex justify-between px-5 items-center sticky top-0 left-0 " style={{ height: "10vh"}}>
                 <img src="/logo-waves.png" alt="logo" className=" h-5/6 rounded-full" />
                 <div className="flex justify-between items-center gap-5 text-white">
@@ -21,10 +18,8 @@ function App() {
                     <div className=" font-bold pr-3 text-lg">Lovely Sabeer</div>
                 </div>
             </div>
-            {/* main body  */}
             <div className="flex " style={{ height: "90vh"}}>
 
-                {/* Menu bar content */}
                 <div className="flex flex-col w-1/6 border-e-2 border-gray-300  pt-5 ">
                     <div className=" font-bold px-3 py-4 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(1)} >Home</div>
 					<div className=" font-bold px-3 text-lg cursor-pointer " >
@@ -43,7 +38,6 @@ function App() {
 							<li className="py-4 pl-6  hover:bg-slate-300"  onClick={() => setSelect(3.3)}>Stock Details</li>
 						</ul>
 					</div>
-					{/* <div className=" font-bold px-3 py-4 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(4)} >Sales Report</div> */}
 					<div className=" font-bold px-3 py-4 text-lg cursor-pointer hover:bg-slate-300  " onClick={()=>setSelect(5)} >Users Management</div>
 				</div>
                 {
