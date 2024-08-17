@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 function Report() {
     const [allData, setAllData] = useState();
 
-    const url = "https://water-server.vercel.app/api";
+    const url = "https://waterserver-4f44.onrender.com";
 
     const handleGet = async () => {
         try {

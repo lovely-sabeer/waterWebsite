@@ -20,7 +20,7 @@ function AddCustomer({ func }) {
     const [dispatchData, setDispatchData] = useState([]);
 
     
-    const url = "https://water-server.vercel.app/api";
+    const url = "https://waterserver-4f44.onrender.com";
     
     const handlePost = () => {
         fetch(url + '/customer/addCustomer', {

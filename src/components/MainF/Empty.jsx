@@ -7,7 +7,7 @@ function Empty() {
     const [addnew, setAddnew] = useState(0);
     const [datas, setDatas] = useState([]);
 
-	const url = "https://water-server.vercel.app/api";
+	const url = "https://waterserver-4f44.onrender.com";
 
 	const getData = async () => {
         await fetch(url + "/empty/emptyRecieve")
