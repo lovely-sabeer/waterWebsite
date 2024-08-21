@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 function Stock() {
     const [datas, setDatas] = useState([]);
 
-	const url = "https://waterserver-4f44.onrender.com";
+	const url = "https://water-server.vercel.app/api";
 
 	const getData = async () => {
         await fetch(url + "/store/recieveStore")

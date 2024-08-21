@@ -8,7 +8,7 @@ function Dispatch() {
     const [dispatchData, setDispatchData] = useState([{ ml500Qty: 0, ml1000Qty: 0, ml1500Qty: 0, ml5000Qty: 0, ml19000Qty: 0 }]);
     const [allData, setAllData] = useState();
 
-    const url = "https://waterserver-4f44.onrender.com";
+    const url = "https://water-server.vercel.app/api";
     
     const notify = async () => {
         if (dispatchData.length > 0 ) {
