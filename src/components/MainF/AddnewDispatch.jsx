@@ -77,6 +77,7 @@ function AddnewDispatch({ func, addnew }) {
         })
     }
 
+	
     const handleReport = () => {
         fetch(url + '/report/addReport', {
                 method: 'POST',
