@@ -39,7 +39,7 @@ const Category = ({setQty500, setQty1000, setQty1500, setQty5000, setQty19000}) 
 	)
 }
 
-function AddnewDispatch({ func, addnew }) {
+function AddnewDispatch({ func, empty, setRender }) {
     const manufacturerName = "Sub Store";
     const [date, setDate] = useState(()=>{const today = new Date().toISOString().split('T')[0];return today;});
     const [ml500Qty, setMl500Qty] = useState(0);
@@ -47,7 +47,6 @@ function AddnewDispatch({ func, addnew }) {
     const [ml1500Qty, setMl1500Qty] = useState(0);
     const [ml5000Qty, setMl5000Qty] = useState(0);
     const [ml19000Qty, setMl19000Qty] = useState(0);
-    const [datas, setDatas] = useState([]);
     const [emptyData, setEmptyData] = useState([]);
     const [dispatchData, setDispatchData] = useState([]);
     
@@ -55,15 +54,9 @@ function AddnewDispatch({ func, addnew }) {
 	const flag = false
     
     const url = "https://water-server.vercel.app/api";
-    
-    const getData = async () => {
-        await fetch(url + "/dispatch/dispatchrecieve")
-        .then(response => response.json())
-        .then(data => setDatas(data))
-    }
 
     useEffect(() => {
-        getData()
+        setEmptyData(empty)
     }, [some])
 
     const handlePost = () => {
@@ -88,11 +81,11 @@ function AddnewDispatch({ func, addnew }) {
         })
     }
 
-    const getEmptyData = async () => {
-        await fetch(url + "/empty/emptyRecieve")
-        .then(response => response.json())
-        .then(data => setEmptyData(data))
-    }
+    // const getEmptyData = async () => {
+    //     await fetch(url + "/empty/emptyRecieve")
+    //     .then(response => response.json())
+    //     .then(data => setEmptyData(data))
+    // }
     
     const handleGetStore = async () => {
         try {
@@ -121,7 +114,6 @@ function AddnewDispatch({ func, addnew }) {
     }
 
     useEffect(() => {
-        getEmptyData()
         handleGetStore()
     }, [])
 
@@ -131,8 +123,14 @@ function AddnewDispatch({ func, addnew }) {
             method: 'PUT',
             headers:{'Content-Type':'application/JSON'},
             body: JSON.stringify({date: ndate, ml500Qty: parseInt(nml500Qty)-(parseInt(ml500Qty)*24), ml1000Qty: parseInt(nml1000Qty)-(parseInt(ml1000Qty)*15), ml1500Qty: parseInt(nml1500Qty)-(parseInt(ml1500Qty)*12), ml5000Qty: parseInt(nml5000Qty)-(parseInt(ml5000Qty)*4), ml19000Qty: parseInt(nml19000Qty)-parseInt(ml19000Qty)})})
-            .then((res, err) => {
-                res.ok ? func(0) : console.log("something wrong", err)
+					.then((res, err) => {
+						if (res.ok) {
+							func(0);
+							setRender(2.2)
+						}
+						else {
+							console.log("something wrong", err)
+						}
         })
     }
        
@@ -149,7 +147,7 @@ function AddnewDispatch({ func, addnew }) {
 				</div>
             </div>
 			<Category setQty500={setMl500Qty} setQty1000={setMl1000Qty} setQty1500={setMl1500Qty} setQty5000={setMl5000Qty} setQty19000={setMl19000Qty} />
-            <button className='mt-7 bg-green-600 hover:bg-green-800 px-8 py-2 rounded text-white font-bold ' onClick={() => { handlePost(); setSome(some + 1); getData(); handleReport(); handleUpdate(); handleUpdateStore()}}>Submit</button>
+            <button className='mt-7 bg-green-600 hover:bg-green-800 px-8 py-2 rounded text-white font-bold ' onClick={() => { handlePost(); setSome(some + 1);handleReport(); handleUpdate(); handleUpdateStore()}}>Submit</button>
 		</div>
 	)
 }

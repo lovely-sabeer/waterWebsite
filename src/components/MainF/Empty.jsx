@@ -3,25 +3,25 @@ import Addnew from './AddnewEmpty';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Empty() {
+function Empty({empty, setRender}) {
     const [addnew, setAddnew] = useState(0);
-    const [datas, setDatas] = useState([]);
+    // const [empty, setempty] = useState([]);
 
-	const url = "https://water-server.vercel.app/api";
+	// const url = "https://water-server.vercel.app/api";
 
-	const getData = async () => {
-        await fetch(url + "/empty/emptyRecieve")
-        .then(response => response.json())
-        .then(data => setDatas(data))
-    }
+	// const getData = async () => {
+    //     await fetch(url + "/empty/emptyRecieve")
+    //     .then(response => response.json())
+    //     .then(data => setempty(data))
+    // }
     
-	useEffect(() => {
-        getData()
-    }, [addnew])
+	// useEffect(() => {
+    //     getData()
+    // }, [addnew])
     
-	useEffect(() => {
-		getData()
-    }, [])
+	// useEffect(() => {
+	// 	getData()
+    // }, [])
     
 	return (
 		<div className='w-full relative'>
@@ -46,27 +46,27 @@ function Empty() {
                             </tr>
                         </thead>
                         {
-                            datas && datas.length > 0 ? (
+                            empty && empty.length > 0 ? (
                                 <tbody >
                                     <tr className='h-12 bg-red-100 border border-black'>
                                         <td className=' w-80 border-r border-black'>500 ml : </td>
-                                        <td className=' w-80 border-r border-black'>{datas[0].ml500Qty}</td>
+                                        <td className=' w-80 border-r border-black'>{empty[0].ml500Qty}</td>
                                     </tr>
                                     <tr className='h-12 bg-red-100 border border-black'>
                                         <td className=' w-80 border-r border-black'>1000 ml :</td>
-                                        <td className=' w-80 border-r border-black'>{ datas[0].ml1000Qty}</td>
+                                        <td className=' w-80 border-r border-black'>{ empty[0].ml1000Qty}</td>
                                     </tr>
                                     <tr className='h-12 bg-red-100 border border-black'>
                                         <td className=' w-80 border-r border-black'>1500 ml :</td>
-                                        <td className=' w-80 border-r border-black'>{ datas[0].ml1500Qty}</td>
+                                        <td className=' w-80 border-r border-black'>{ empty[0].ml1500Qty}</td>
                                     </tr>
                                     <tr className='h-12 bg-red-100 border border-black'>
                                         <td className=' w-80 border-r border-black'>5000 ml :</td>
-                                        <td className=' w-80 border-r border-black'>{datas[0].ml500Qty}</td>
+                                        <td className=' w-80 border-r border-black'>{empty[0].ml500Qty}</td>
                                     </tr>
                                     <tr className='h-12 bg-red-100 border border-black'>
                                         <td className=' w-80 border-r border-black'>19000 ml :</td>
-                                        <td className=' w-80 border-r border-black'>{ datas[0].ml19000Qty}</td>
+                                        <td className=' w-80 border-r border-black'>{ empty[0].ml19000Qty}</td>
                                     </tr>
                                 </tbody>
                             ) : (console.log("Something Error from fetching Data"))
@@ -74,7 +74,7 @@ function Empty() {
                     </table>
                 </div>
 				{
-					addnew === 1 && <Addnew func={ setAddnew} addnew={addnew}  />
+					addnew === 1 && <Addnew func={setAddnew} empty={empty} setRender={ setRender} />
 				}
 				
 			</div>

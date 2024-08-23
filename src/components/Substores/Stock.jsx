@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
-function Stock() {
+function Stock({store}) {
     const [datas, setDatas] = useState([]);
 
-	const url = "https://water-server.vercel.app/api";
+	// const url = "https://water-server.vercel.app/api";
 
-	const getData = async () => {
-        await fetch(url + "/store/recieveStore")
-            .then(response => response.json())
-            .then(data => setDatas(data))
-    }
+	// const getData = async () => {
+    //     await fetch(url + "/store/recieveStore")
+    //         .then(response => response.json())
+    //         .then(data => setDatas(data))
+    // }
     
 	useEffect(() => {
-        getData()
+        setDatas(store)
 	},[])
 	
 	return (

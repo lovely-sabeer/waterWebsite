@@ -4,62 +4,62 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-function Distributers({ func }) {
+function Distributers({distributers, store, setRender}) {
     const [addnew, setAddnew] = useState(0);
-	const [allData, setAllData] = useState();
     const [dispatchData, setDispatchData] = useState([{ ml500Qty: 0, ml1000Qty: 0, ml1500Qty: 0, ml5000Qty: 0, ml19000Qty: 0 }]);
 
     const url = "https://water-server.vercel.app/api";
 
-    const notify = async () => {
-        if (dispatchData.length > 0) {
-            if (
-                dispatchData.ml500Qty < 200 || 
-                dispatchData.ml1000Qty < 200 || 
-                dispatchData.ml1500Qty < 200 || 
-                dispatchData.ml5000Qty < 200 || 
-                dispatchData.ml19000Qty < 200
-            ) {
-                toast.error('You have low stock! Please check the Stock Details.');
-            }
-        } else {
-            console.log("dispatchData is empty or undefined");
-        }
-    };
+    // const notify = async () => {
+    //     console.log(dispatchData)
+    //     if (dispatchData.length > 0) {
+    //         if (
+    //             dispatchData.ml500Qty < 200 || 
+    //             dispatchData.ml1000Qty < 200 || 
+    //             dispatchData.ml1500Qty < 200 || 
+    //             dispatchData.ml5000Qty < 200 || 
+    //             dispatchData.ml19000Qty < 200
+    //         ) {
+    //             toast.error('You have low stock! Please check the Stock Details.');
+    //         }
+    //     } else {
+    //         console.log("dispatchData is empty or undefined");
+    //     }
+    // };
 
-    const handleGetStore = async () => {
-        try {
-            const response = await fetch(url + "/recieve/recieveStore");
-            const data = await response.json();
-            setDispatchData(data);
-            notify();
-        } catch (error) {
-            if (error.name === "AbortError") {
-                console.log("Request was aborted");
-            } else {
-                console.error(error);
-            }
-        }
-    };
+    // const handleGetStore = async () => {
+    //     try {
+    //         const response = await fetch(url + "/recieve/recieveStore");
+    //         const data = await response.json();
+    //         setDispatchData(data);
 
-    const handleGet = async () => {
-        try {
-            const response = await fetch(url + "/distributer/DistributersRecieve");
-            const data = await response.json();
-            setAllData(data);
-        }catch (error) {
-            if (error.name === "AbortError") {
-                console.log("Request was aborted");
-            } else {
-                console.error(error);
-            }
-        }
-    };  
+    //         notify();
+    //     } catch (error) {
+    //         if (error.name === "AbortError") {
+    //             console.log("Request was aborted");
+    //         } else {
+    //             console.error(error);
+    //         }
+    //     }
+    // };
 
-    useEffect(() => {
-        handleGetStore();
-        handleGet();
-    }, [addnew]);
+    // const handleGet = async () => {
+    //     try {
+    //         const response = await fetch(url + "/distributer/DistributersRecieve");
+    //         const data = await response.json();
+    //         setAllData(data);
+    //     }catch (error) {
+    //         if (error.name === "AbortError") {
+    //             console.log("Request was aborted");
+    //         } else {
+    //             console.error(error);
+    //         }
+    //     }
+    // };  
+
+    // useEffect(() => {
+    //     handleGetStore();
+    // }, [addnew]);
     
     return (
         <div className='w-full relative' style={{ height: "90vh" }}>
@@ -91,8 +91,8 @@ function Distributers({ func }) {
                         </thead>
                         <tbody>
 							{
-                                allData && allData.length > 0 ? (
-                                    allData.toReversed().map((value, index) => {
+                                distributers && distributers.length > 0 ? (
+                                    distributers.toReversed().map((value, index) => {
                                         const dates = value.date.split('-');
                                         const formattedDate = `${dates[2]}-${dates[1]}-${dates[0]}`;
                                         return (
@@ -116,7 +116,7 @@ function Distributers({ func }) {
                     </table>
                 </div>
                 {
-                    addnew === 1 && <AddDistributer func={setAddnew} />
+                    addnew === 1 && <AddDistributer func={setAddnew} store={store} setRender={setRender} />
                 }
             </div>
             <ToastContainer />

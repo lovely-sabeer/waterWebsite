@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-function Addnew({ func, addnew }) {
+function Addnew({ func, empty, setRender}) {
     const [manufacturerName, setManufacturerName] = useState();
     const [invoiceNo, setInvoiceNo] = useState();
 	const [date, setDate] = useState(() => {const today = new Date().toISOString().split('T')[0]; return today;});
@@ -22,15 +22,16 @@ function Addnew({ func, addnew }) {
     
     const url = "https://water-server.vercel.app/api";
     
-    const getData = async () => {
-        await fetch(url + "/empty/emptyRecieve")
-        .then(response => response.json())
-        .then(data => setDatas(data))
-	}
+  //   const getData = async () => {
+  //       await fetch(url + "/empty/emptyRecieve")
+  //       .then(response => response.json())
+  //       .then(data => setDatas(data))
+	// }
 	
     useEffect(() => {
-        getData()
-    }, [some])
+        setDatas(empty)
+	  }, [some])
+	
 
     const handlePost = () => {
         fetch(url + '/empty/addEmpty', {
@@ -38,9 +39,13 @@ function Addnew({ func, addnew }) {
                 headers: { 'Content-Type': 'application/JSON' },
                 body: JSON.stringify({manufacturerName, invoiceNo, date, ml500Qty, ml500Price, ml1000Qty, ml1000Price, ml1500Qty,  ml1500Price, ml5000Qty, ml5000Price, ml19000Qty, ml19000Price}) 
         })
-        .then((res, err) => {
-					res.ok ? func(0) : console.log("something wrong", err)
-					getData()
+					.then((res, err) => {
+						if (res.ok) {
+							setRender(2.1)
+							func(0);
+						} else {
+							console.log("something wrong",err)
+						}
         })
 	}
 	

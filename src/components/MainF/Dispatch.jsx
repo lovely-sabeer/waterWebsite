@@ -3,10 +3,10 @@ import AddnewDispatch from "./AddnewDispatch";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Dispatch() {
+function Dispatch({dispatch, empty, setRender }) {
     const [addnew, setAddnew] = useState(0);
     const [dispatchData, setDispatchData] = useState([{ ml500Qty: 0, ml1000Qty: 0, ml1500Qty: 0, ml5000Qty: 0, ml19000Qty: 0 }]);
-    const [allData, setAllData] = useState();
+    // const [allData, setAllData] = useState();
 
     const url = "https://water-server.vercel.app/api";
     
@@ -43,23 +43,23 @@ function Dispatch() {
         }
     }
 	
-    const handleGet = async () => {
-        try {
-            const response = await fetch(url + "/dispatch/dispatchrecieve");
-            const data = await response.json();
-            setAllData(data);
-        }catch (error) {
-            if (error.name === "AbortError") {
-                console.log("Request was aborted");
-            } else {
-                console.error(error);
-            }
-        }
-    };
+    // const handleGet = async () => {
+    //     try {
+    //         const response = await fetch(url + "/dispatch/dispatchrecieve");
+    //         const data = await response.json();
+    //         setAllData(data);
+    //     }catch (error) {
+    //         if (error.name === "AbortError") {
+    //             console.log("Request was aborted");
+    //         } else {
+    //             console.error(error);
+    //         }
+    //     }
+    // };
 
     useEffect(() => {
         getData();
-		handleGet();
+		// handleGet();
 	}, [addnew]);
 
     return (
@@ -80,8 +80,6 @@ function Dispatch() {
                     <table className='text-center flex flex-col '>
                         <thead className='sticky top-0'>
                             <tr className='h-10 bg-slate-950 text-white border border-black'>
-                                {/* <th className=' w-48'>Name : </th> */}
-                                {/* <th className=' w-48'>Invoice no: </th> */}
                                 <th className=' w-48 border-r border-gray-300'>Date : </th>
                                 <th className=' w-48 border-r border-gray-300'>500ml : </th>
                                 <th className=' w-48 border-r border-gray-300'>1000ml : </th>
@@ -92,8 +90,8 @@ function Dispatch() {
                         </thead>
                         <tbody>
 							{
-                                allData && allData.length > 0 ? (
-										allData.toReversed().map((value, index) => {
+                                dispatch && dispatch.length > 0 ? (
+										dispatch.toReversed().map((value, index) => {
                                             const dates = value.date.split('-');
                                             const formattedDate = `${dates[2]}-${dates[1]}-${dates[0]}`;
                                             return (
@@ -115,7 +113,7 @@ function Dispatch() {
                     </table>
                 </div>
 				{
-					addnew === 1 && <AddnewDispatch func={ setAddnew} />
+					addnew === 1 && <AddnewDispatch func={ setAddnew}  empty={empty} setRender={setRender} />
 				}
             </div>
             <ToastContainer />

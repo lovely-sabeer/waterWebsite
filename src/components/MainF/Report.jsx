@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
-function Report() {
-    const [allData, setAllData] = useState();
+function Report({ report }) {
+    // const [allData, setAllData] = useState();
 
-    const url = "https://water-server.vercel.app/api";
+    // const url = "https://water-server.vercel.app/api";
 
-    const handleGet = async () => {
-        try {
-            const response = await fetch(url + "/report/reportRecieve");
-            const data = await response.json();
-            setAllData(data);
-        }catch (error) {
-            if (error.name === "AbortError") {
-                console.log("Request was aborted");
-            } else {
-                console.error(error);
-            }
-        }
-    };  
+    // const handleGet = async () => {
+    //     try {
+    //         const response = await fetch(url + "/report/reportRecieve");
+    //         const data = await response.json();
+    //         setAllData(data);
+    //     }catch (error) {
+    //         if (error.name === "AbortError") {
+    //             console.log("Request was aborted");
+    //         } else {
+    //             console.error(error);
+    //         }
+    //     }
+    // };  
 
-    useEffect(() => {
-        handleGet();
-    }, []);
+    // useEffect(() => {
+    //     handleGet();
+    // }, []);
 	
   return (
 		<div className='w-full relative' style={{ height: "90vh" }}>
@@ -51,12 +51,12 @@ function Report() {
                         </thead>
                         <tbody>
 							{
-                                allData && allData.length > 0 ? (
-									allData.toReversed().map((value, index) => {
+                                report && report.length > 0 ? (
+									report.toReversed().map((value, index) => {
 										const dates = value.date.split('-');
                                         const formattedDate = `${dates[2]}-${dates[1]}-${dates[0]}`;
                                         return(
-                                            value.flag == true ? (
+                                            value.flag === true ? (
                                                 <tr key={index} className='h-10 bg-red-100 border border-black'>
                                                     <td className=' w-1/12 border-r border-gray-700 bg-green-600'>Purchase</td>
                                                     <td className=' w-1/12 border-r border-gray-700 '>{formattedDate}</td>

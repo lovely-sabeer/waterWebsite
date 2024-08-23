@@ -4,15 +4,110 @@ import Dispatch from "./components/MainF/Dispatch";
 import Report from "./components/MainF/Report";
 import Distributers from "./components/Substores/Distributers";
 import Customer from "./components/Substores/Customer";
-// import GetTotal from "./getTotal";
 import Stock from "./components/Substores/Stock";
+// import GetAll from "./getAll";
 
 function App() {
     const [selected, setSelect] = useState(1)
+    const [render, setRender] = useState([])
+    const [empty, setEmpty] = useState([]);
+    const [dispatch, setsetDispatch] = useState([]);
+    const [report, setReport] = useState([]);
+    const [distributers, setDistributers] = useState([]);
+    const [store, setStore] = useState([]);
+    const [customer, setCustomer] = useState([]);
+
+    const url = "https://water-server.vercel.app/api";
+
+    const getForEmpty = async () => {
+        try {
+            const response = await fetch(url + "/empty/emptyRecieve");
+            const data = await response.json();
+            setEmpty(data);
+        }catch (error) {
+            if (error.name === "AbortError") {
+                console.log("Request was aborted");
+            } else {
+                console.error(error);
+            }
+        }
+    }
+
+    const getForDispatch = async () => {
+        try {
+            const response = await fetch(url + "/dispatch/dispatchrecieve");
+            const data = await response.json();
+            setsetDispatch(data);
+        }catch (error) {
+            if (error.name === "AbortError") {
+                console.log("Request was aborted");
+            } else {
+                console.error(error);
+            }
+        }
+    };
+
+    const getForReport = async () => {
+        try {
+            const response = await fetch(url + "/report/reportRecieve");
+            const data = await response.json();
+            setReport(data);
+        }catch (error) {
+            if (error.name === "AbortError") {
+                console.log("Request was aborted");
+            } else {
+                console.error(error);
+            }
+        }
+    };
+
+    const getForDistributer = async () => {
+        try {
+            const response = await fetch(url + "/distributer/DistributersRecieve");
+            const data = await response.json();
+            setDistributers(data);
+        }catch (error) {
+            if (error.name === "AbortError") {
+                console.log("Request was aborted");
+            } else {
+                console.error(error);
+            }
+        }
+    }; 
+
+    const getForStore = async () => {
+        await fetch(url + "/store/recieveStore")
+            .then(response => response.json())
+            .then(data => setStore(data))
+    }
+
+	const getForCustomer = async () => {
+    	try {
+    		await fetch(url + "/customer/customrecieve")
+    		.then(response => response.json())
+            .then(data => setCustomer(data))
+            
+        }
+        catch (error) {
+    		if (error.name === "AbortError") {
+                console.log("Request was aborted");
+            } else {
+                console.error(error);
+            }
+        }
+    }
+
+    useEffect(() => {
+        getForEmpty();
+        getForDispatch();
+        getForReport();
+        getForDistributer();
+        getForStore();
+        getForCustomer();
+    },[render])
     
     return (
 			<div className="h-screen relative overflow-hidden">
-						{/* <GetTotal/> */}
             {/* navigation bar  */}
             <div className="w-full bg-slate-800 flex justify-between px-5 items-center sticky top-0 left-0 " style={{ height: "10vh"}}>
                 <img src="/logo-waves.png" alt="logo" className=" h-5/6 rounded-full" />
@@ -56,22 +151,22 @@ function App() {
                     )
                 }
                 {
-                    selected === 2.1 && (<Empty/>)
+                    selected === 2.1 && (<Empty empty={empty} setRender={ setRender} />)
                 }
                 {
-                    selected === 2.2 && (<Dispatch/>)
+                    selected === 2.2 && (<Dispatch dispatch={dispatch}  empty={empty} setRender={ setRender} />)
                 }
                 {
-                    selected === 2.3 && (<Report/>)
+                    selected === 2.3 && (<Report report={report}/>)
                 }
                 {
-                    selected === 3.1 && (<Distributers/>)
+                    selected === 3.1 && (<Distributers distributers={ distributers} store={store} setRender={setRender} />)
                 }
                 {
-                    selected === 3.2 && (<Customer/>)
+                    selected === 3.2 && (<Customer customer={ customer} store={store} setRender={setRender} />)
                 }
                 {
-                    selected === 3.3 && (<Stock/>)
+                    selected === 3.3 && (<Stock store={ store} />)
                 }
                 {
                     selected === 5 && (

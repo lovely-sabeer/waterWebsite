@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function AddCustomer({ func }) {
+function AddCustomer({ func, store, setRender }) {
     const [customer, setCustomer] = useState("");
 	const [invoiceNo, setInvoice] = useState("");
     const [date, setDate] = useState(() => {const today = new Date().toISOString().split('T')[0];return today;});
@@ -33,19 +33,19 @@ function AddCustomer({ func }) {
         })
     }
 
-    const handleGetStore = async () => {
-        try {
-            const response = await fetch(url + "/store/recieveStore");
-            const data = await response.json();
-            setDispatchData(data);
-        }catch (error) {
-            if (error.name === "AbortError") {
-                console.log("Request was aborted");
-            } else {
-                console.error(error);
-            }
-        }
-    };
+    // const handleGetStore = async () => {
+    //     try {
+    //         const response = await fetch(url + "/store/recieveStore");
+    //         const data = await response.json();
+    //         setDispatchData(data);
+    //     }catch (error) {
+    //         if (error.name === "AbortError") {
+    //             console.log("Request was aborted");
+    //         } else {
+    //             console.error(error);
+    //         }
+    //     }
+    // };
 
     const handleUpdateStore = async () => {
         const { _id: id, date: ndate, ml500Qty: nml500Qty, ml1000Qty: nml1000Qty, ml1500Qty: nml1500Qty, ml5000Qty: nml5000Qty, ml19000Qty: nml19000Qty } = dispatchData[0];
@@ -55,12 +55,19 @@ function AddCustomer({ func }) {
             body: JSON.stringify({ date: ndate, ml500Qty: parseInt(nml500Qty) - parseInt(ml500Qty), ml1000Qty: parseInt(nml1000Qty) - parseInt(ml1000Qty), ml1500Qty: parseInt(nml1500Qty) - parseInt(ml1500Qty), ml5000Qty: parseInt(nml5000Qty) - parseInt(ml5000Qty), ml19000Qty: parseInt(nml19000Qty) - parseInt(ml19000Qty) })
             }
         )
-        .then((res, err) => {res.ok ? func(0) : console.log("something wrong", err)}
+            .then((res, err) => {
+                if (res.ok) {
+                    func(0);
+                    setRender(3.3)
+                } else {
+                    console.log("something wrong", err)
+                }
+            }
         )
     }
     
     useEffect(() => {
-        handleGetStore();
+        setDispatchData(store)
     })
        
     return (

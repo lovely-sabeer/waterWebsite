@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function AddDistributer({ func }) {
+function AddDistributer({ func, store, setRender }) {
     const [distributer, setDistributer] = useState("");
 	const [invoiceNo, setInvoice] = useState("");
     const [date, setDate] = useState(() => {const today = new Date().toISOString().split('T')[0];return today;});
@@ -33,19 +33,19 @@ function AddDistributer({ func }) {
         })
     }
     
-    const handleGetStore = async () => {
-        try {
-            const response = await fetch(url + "/store/recieveStore");
-            const data = await response.json();
-            setDispatchData(data);
-        }catch (error) {
-            if (error.name === "AbortError") {
-                console.log("Request was aborted");
-            } else {
-                console.error(error);
-            }
-        }
-    }
+    // const handleGetStore = async () => {
+    //     try {
+    //         const response = await fetch(url + "/store/recieveStore");
+    //         const data = await response.json();
+    //         setDispatchData(data);
+    //     }catch (error) {
+    //         if (error.name === "AbortError") {
+    //             console.log("Request was aborted");
+    //         } else {
+    //             console.error(error);
+    //         }
+    //     }
+    // }
 
     const handleUpdateStore = async () => {
         const { _id: id, date: ndate, ml500Qty: nml500Qty, ml1000Qty: nml1000Qty, ml1500Qty: nml1500Qty, ml5000Qty: nml5000Qty, ml19000Qty: nml19000Qty } = dispatchData[0];
@@ -53,15 +53,20 @@ function AddDistributer({ func }) {
             method: 'PUT',
             headers:{'Content-Type':'application/JSON'},
             body: JSON.stringify({ date: ndate, ml500Qty: parseInt(nml500Qty) - parseInt(ml500Qty), ml1000Qty: parseInt(nml1000Qty) - parseInt(ml1000Qty), ml1500Qty: parseInt(nml1500Qty) - parseInt(ml1500Qty), ml5000Qty: parseInt(nml5000Qty) - parseInt(ml5000Qty), ml19000Qty: parseInt(nml19000Qty) - parseInt(ml19000Qty) })
+        })
+        .then((res, err) => {
+            if (res.ok) {
+                func(0);
+                setRender(3.1)
+            } else {
+                console.log("something wrong", err)
             }
-        )
-        .then((res, err) => {res.ok ? func(0) : console.log("something wrong", err)}
-        )
+        })
     }
 
     useEffect(() => {
-        handleGetStore();
-    })
+        setDispatchData(store)
+    },[some])
        
     return (
 		<div className=' absolute w-4/6  border-2 border-black top-5 rounded-md p-7 bg-white z-30 flex flex-col items-center justify-center ' style={{ boxShadow: "5px 5px 20px black, -5px -5px 20px black" }}>
