@@ -5,7 +5,6 @@ import Report from "./components/MainF/Report";
 import Distributers from "./components/Substores/Distributers";
 import Customer from "./components/Substores/Customer";
 import Stock from "./components/Substores/Stock";
-// import GetAll from "./getAll";
 
 function App() {
     const [selected, setSelect] = useState(1)

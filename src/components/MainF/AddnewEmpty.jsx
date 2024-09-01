@@ -22,12 +22,6 @@ function Addnew({ func, empty, setRender}) {
     
     const url = "https://water-server.vercel.app/api";
     
-  //   const getData = async () => {
-  //       await fetch(url + "/empty/emptyRecieve")
-  //       .then(response => response.json())
-  //       .then(data => setDatas(data))
-	// }
-	
     useEffect(() => {
         setDatas(empty)
 	  }, [some])

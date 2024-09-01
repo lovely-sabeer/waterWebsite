@@ -42,24 +42,8 @@ function Dispatch({dispatch, empty, setRender }) {
             }
         }
     }
-	
-    // const handleGet = async () => {
-    //     try {
-    //         const response = await fetch(url + "/dispatch/dispatchrecieve");
-    //         const data = await response.json();
-    //         setAllData(data);
-    //     }catch (error) {
-    //         if (error.name === "AbortError") {
-    //             console.log("Request was aborted");
-    //         } else {
-    //             console.error(error);
-    //         }
-    //     }
-    // };
-
     useEffect(() => {
         getData();
-		// handleGet();
 	}, [addnew]);
 
     return (

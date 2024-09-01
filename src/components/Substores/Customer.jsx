@@ -5,64 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function Customer({customer, store, setRender}) {
-    const [addnew, setAddnew] = useState(0);
-    // const [dispatchData, setDispatchData] = useState([{ ml500Qty: 0, ml1000Qty: 0, ml1500Qty: 0, ml5000Qty: 0, ml19000Qty: 0 }]);
-
-
-    // const url = "https://water-server.vercel.app/api";
+	const [addnew, setAddnew] = useState(0);
 	
-    // const notify = async () => {
-    //     if (dispatchData.length > 0) {
-    //         if (
-    //             dispatchData[0].ml500Qty < 200 ||
-    //             dispatchData[0].ml1000Qty < 200 ||
-    //             dispatchData[0].ml1500Qty < 200 ||
-    //             dispatchData[0].ml5000Qty < 200 ||
-    //             dispatchData[0].ml19000Qty < 200
-    //         ) {
-    //             toast.error('You have low stock! Please check the Stock Details.');
-    //         }
-    //     } else {
-    //         console.log("dispatchData is empty or undefined");
-    //     }
-    // };
-
-    // const handleGetStore = async () => {
-    //     try {
-    //         const response = await fetch(url + "/store/recieveStore");
-    //         const data = await response.json();
-    //         setDispatchData(data);
-    //         notify(); 
-    //     } catch (error) {
-    //         if (error.name === "AbortError") {
-    //             console.log("Request was aborted");
-    //         } else {
-    //             console.error(error);
-    //         }
-    //     }
-    // };
-
-	// const getData = async () => {
-	// 	try {
-	// 		await fetch(url + "/customer/customrecieve")
-	// 		.then(response => response.json())
-    //         .then(data => setEmptyData(data))
-            
-    //     }
-    //     catch (error) {
-	// 		if (error.name === "AbortError") {
-    //             console.log("Request was aborted");
-    //         } else {
-    //             console.error(error);
-    //         }
-    //     }
-    // }
-    
-    // useEffect(() => {
-    //          handleGetStore();
-    //          getData();
-	// },[addnew])    
-
 	return (
 	  <div className='w-full relative' style={{ height: "90vh" }}>
 		  <div className=' w-full flex z-20 ' style={{ height: "10vh" }} >

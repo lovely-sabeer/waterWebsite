@@ -2,27 +2,6 @@ import React from "react";
 
 
 function Report({ report }) {
-    // const [allData, setAllData] = useState();
-
-    // const url = "https://water-server.vercel.app/api";
-
-    // const handleGet = async () => {
-    //     try {
-    //         const response = await fetch(url + "/report/reportRecieve");
-    //         const data = await response.json();
-    //         setAllData(data);
-    //     }catch (error) {
-    //         if (error.name === "AbortError") {
-    //             console.log("Request was aborted");
-    //         } else {
-    //             console.error(error);
-    //         }
-    //     }
-    // };  
-
-    // useEffect(() => {
-    //     handleGet();
-    // }, []);
 	
   return (
 		<div className='w-full relative' style={{ height: "90vh" }}>

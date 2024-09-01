@@ -81,12 +81,6 @@ function AddnewDispatch({ func, empty, setRender }) {
         })
     }
 
-    // const getEmptyData = async () => {
-    //     await fetch(url + "/empty/emptyRecieve")
-    //     .then(response => response.json())
-    //     .then(data => setEmptyData(data))
-    // }
-    
     const handleGetStore = async () => {
         try {
             const response = await fetch(url + "/store/recieveStore");

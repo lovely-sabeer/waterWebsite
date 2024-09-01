@@ -33,20 +33,6 @@ function AddDistributer({ func, store, setRender }) {
         })
     }
     
-    // const handleGetStore = async () => {
-    //     try {
-    //         const response = await fetch(url + "/store/recieveStore");
-    //         const data = await response.json();
-    //         setDispatchData(data);
-    //     }catch (error) {
-    //         if (error.name === "AbortError") {
-    //             console.log("Request was aborted");
-    //         } else {
-    //             console.error(error);
-    //         }
-    //     }
-    // }
-
     const handleUpdateStore = async () => {
         const { _id: id, date: ndate, ml500Qty: nml500Qty, ml1000Qty: nml1000Qty, ml1500Qty: nml1500Qty, ml5000Qty: nml5000Qty, ml19000Qty: nml19000Qty } = dispatchData[0];
         await fetch(url + "/store/updateStore/" + id, {
