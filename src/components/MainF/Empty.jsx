@@ -5,23 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Empty({empty, setRender}) {
     const [addnew, setAddnew] = useState(0);
-    // const [empty, setempty] = useState([]);
-
-	// const url = "https://water-server.vercel.app/api";
-
-	// const getData = async () => {
-    //     await fetch(url + "/empty/emptyRecieve")
-    //     .then(response => response.json())
-    //     .then(data => setempty(data))
-    // }
-    
-	// useEffect(() => {
-    //     getData()
-    // }, [addnew])
-    
-	// useEffect(() => {
-	// 	getData()
-    // }, [])
     
 	return (
 		<div className='w-full relative'>
