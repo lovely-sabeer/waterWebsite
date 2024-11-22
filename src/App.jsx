@@ -182,7 +182,8 @@ function App() {
                                     <div>Lovely sabeer</div>
                                     <div>Recieved Bottles: 400</div>
                                 </div>
-                            </div>
+								</div>
+								
     					</div>
     				)
                 }
